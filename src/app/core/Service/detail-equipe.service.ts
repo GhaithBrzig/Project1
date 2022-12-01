@@ -4,9 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Equipe} from '../model/Equipe';
 import {DetailEq} from '../model/DetailEq';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DetailEquipeService {
 
   public url= environment.defaultUrl+'/DetailEquipeC'
