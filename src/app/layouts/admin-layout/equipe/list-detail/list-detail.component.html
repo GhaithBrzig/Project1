@@ -1,0 +1,20 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <h1>Details : ({{length}})</h1>
+        <div class="row"  >
+            <div class="col-md-4" *ngFor="let d of detailsList" >
+                <div class="card card-plain" >
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0"> Detail {{d.idDetailEquipe}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h4>Salle: {{d.salle}}</h4>
+                        <h4>Thematique: {{d.thematique}}</h4>
+                        <a routerLink="/details/update/{{d.idDetailEquipe}}" [ngClass]="['btn', 'btn-outline-warning']">Edit</a>
+                        <button mat-raised-button  rel="tooltip"  class="btn btn-danger" (click)="deleteEquipe(d)" style="float: right;"><i class="material-icons">delete</i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
