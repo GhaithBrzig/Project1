@@ -1,15 +1,15 @@
 <div class="main-content">
     <div class="container-fluid">
         <form class="col-md-6">
-            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" (input)="onSearchByName()" autocomplete="off" placeholder="Search">
         </form>
         <br>
-        <h1>Equipes : ({{(equipesList| filter:searchText).length}})</h1>
+        <h1>Equipes : ({{(equipes).length}})</h1>
         <br>
         <a routerLink="new" [ngClass]="['btn', 'btn-primary']">+ Equipe</a>
         <div class="row"  >
-            <h3 *ngIf="(equipesList| filter:searchText).length === 0"> no elements found !</h3>
-            <div class="col-md-4" *ngFor="let e of equipesList | slice: (page-1) * pageSize : page * pageSize| filter:searchText" >
+            <h3 *ngIf="(equipes).length === 0"> no elements found !</h3>
+            <div class="col-md-4" *ngFor="let e of equipes" >
                <app-equipe
                [equipe]="e"
                (notification)="deleteEquipe($event)"
@@ -26,6 +26,8 @@
         <ngb-pagination
                 [(page)]="page"
                 [pageSize]="pageSize"
-                [collectionSize]="length"></ngb-pagination>
+                [collectionSize]="length"
+        (pageChange)="onSearchByName()"
+        ></ngb-pagination>
     </div>
 </div>

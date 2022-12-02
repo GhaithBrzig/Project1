@@ -22,9 +22,9 @@ export class FormEquipeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.teamService.GetAllEquipe().subscribe(
+    this.teamService.GetAllEquipe({page:0, size:999}).subscribe(
         (data:Equipe[])=>{
-          this.list=data;
+          this.list=data['content'];
           this.route.params.subscribe((params: Params) => {
                 this.id = +params['id'];
                 console.log(params)

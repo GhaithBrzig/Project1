@@ -13,9 +13,9 @@ export class EquipeService {
 
 
 
-  GetAllEquipe()
+  GetAllEquipe(params)
   {
-    return this.httpClient.get(`${this.url}/equipe`);
+    return this.httpClient.get(`${this.url}/equipe`,{params});
   }
 
 

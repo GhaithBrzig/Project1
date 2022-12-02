@@ -11,7 +11,6 @@ import {EquipeService} from '../../../../core/Service/equipe.service';
 })
 export class ListEquipeComponent implements OnInit {
   public equipes: Equipe[];
-  public equipesList: Equipe[];
   public length: number;
   public page = 1;
   public pageSize=2;
@@ -19,24 +18,42 @@ export class ListEquipeComponent implements OnInit {
   constructor(private equipeService: EquipeService, private router:Router) { }
 
   ngOnInit(): void {
-    this.equipeService.GetAllEquipe().subscribe(
-        (data:Equipe[]) => {
-          this.equipes=data;
-          console.log(this.equipes);
-        },
-        () => { console.log('error') },
-        () => {   this.equipesList = this.equipes;
-          this.length = this.equipesList.length;
-        }
-    );
+   this.getEquipesall();
   }
 
+  getEquipesall(){
+    this.equipeService.GetAllEquipe({page:this.page-1, size:this.pageSize}).subscribe(
+(data:Equipe[]) => {
+    this.equipes=data['content'];
+    console.log(this.equipes);
+    this.length=data['totalElements'];
+},
+() => { console.log('error') },
+    () => {
+
+    }
+);
+}
+
+    onSearchByName() {
+        if (!this.searchText) {
+            this.getEquipesall()
+        } else {
+            this.equipeService.searchByNameEquipe({page:this.page-1, size:this.pageSize}, this.searchText).subscribe(
+                (data: Equipe[]) => {
+                    this.equipes = data['content'];
+                }
+            )
+        }
+
+    }
+
   deleteEquipe(equipe: Equipe) {
-    let i = this.equipesList.indexOf(equipe);
+    let i = this.equipes.indexOf(equipe);
     if(confirm("Are you sure to delete "+equipe.nomEquipe)) {
       this.equipeService.deleteEquipe(equipe.idEquipe).subscribe(
           ()=>{
-            this.equipesList.splice(i,1)
+            this.equipes.splice(i,1)
           }
       )
 
