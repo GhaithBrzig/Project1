@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EquipeComponent } from './equipe.component';
+import { EquipeComponent } from './equipe/equipe.component';
 import {EquipeRoutingModule} from './equipe-routing.module';
 import { ListEquipeComponent } from './list-equipe/list-equipe.component';
 import { FormEquipeComponent } from './form-equipe/form-equipe.component';
@@ -12,15 +12,19 @@ import {EquipeService} from '../../../core/Service/equipe.service';
 import {DetailEquipeService} from '../../../core/Service/detail-equipe.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { DetailComponent } from './detail/detail.component';
+import {TeamComponent} from './team.component';
 
 
 @NgModule({
   declarations: [
-    EquipeComponent,
+TeamComponent,
     ListEquipeComponent,
     FormEquipeComponent,
     ListDetailComponent,
-    FormDetailComponent
+    FormDetailComponent,
+    DetailComponent,
+      EquipeComponent
   ],
   imports: [
     CommonModule,
@@ -36,4 +40,4 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     DetailEquipeService
   ]
 })
-export class EquipeModule { }
+export class EquipeModule{}

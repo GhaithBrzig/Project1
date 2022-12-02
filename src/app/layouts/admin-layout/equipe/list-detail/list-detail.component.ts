@@ -15,7 +15,7 @@ export class ListDetailComponent implements OnInit {
   public detailsList: DetailEq[];
   public length: number = 0;
   public page = 1;
-  public pageSize=2;
+  public pageSize=3;
   searchText: any;
   constructor(private detailService: DetailEquipeService, private router:Router) { }
 
@@ -32,7 +32,7 @@ export class ListDetailComponent implements OnInit {
     );
   }
 
-  deleteEquipe(detail: DetailEq) {
+  deleteDetails(detail: DetailEq) {
     let i = this.detailsList.indexOf(detail);
     if(confirm("Are you sure to delete "+detail.idDetailEquipe)) {
       this.detailService.deleteDetailEquipe(detail.idDetailEquipe).subscribe(

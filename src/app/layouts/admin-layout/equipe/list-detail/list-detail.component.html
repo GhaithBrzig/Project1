@@ -7,18 +7,13 @@
         <h1>Details : ({{(detailsList| filter:searchText).length}})</h1>
         <div class="row"  >
             <h3 *ngIf="(detailsList| filter:searchText).length === 0"> no elements found !</h3>
-            <div class="col-md-4" *ngFor="let d of detailsList | slice: (page-1) * pageSize : page * pageSize| filter:searchText" >
-                <div class="card card-plain" >
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title mt-0"> Detail {{d.idDetailEquipe}}</h4>
-                    </div>
-                    <div class="card-body">
-                        <h4>Salle: {{d.salle}}</h4>
-                        <h4>Thematique: {{d.thematique}}</h4>
-                        <a routerLink="/details/update/{{d.idDetailEquipe}}" [ngClass]="['btn', 'btn-outline-warning']">Edit</a>
-                        <button mat-raised-button  rel="tooltip"  class="btn btn-danger" (click)="deleteEquipe(d)" style="float: right;"><i class="material-icons">delete</i></button>
-                    </div>
-                </div>
+            <div class="col-md-6 col-lg-4 mb-3" *ngFor="let d of detailsList | slice: (page-1) * pageSize : page * pageSize| filter:searchText">
+<app-detail
+        [detail]="d"
+        (notification)="deleteDetails($event)"
+>
+
+</app-detail>
             </div>
         </div>
     </div>

@@ -42,7 +42,11 @@ export class EquipeService {
     return this.httpClient.put(`${this.url}/addDetails/${id}`,details)
   }
 
-
+searchByNameEquipe(request, search){
+    const params = request;
+    const nomEquipe = search;
+    return this.httpClient.get(this.url+'/search/'+nomEquipe, {params})
+}
 
 
 

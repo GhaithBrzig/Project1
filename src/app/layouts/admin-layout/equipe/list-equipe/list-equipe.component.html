@@ -10,22 +10,12 @@
         <div class="row"  >
             <h3 *ngIf="(equipesList| filter:searchText).length === 0"> no elements found !</h3>
             <div class="col-md-4" *ngFor="let e of equipesList | slice: (page-1) * pageSize : page * pageSize| filter:searchText" >
-                <div class="card card-plain" >
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title mt-0">{{e.nomEquipe}}</h4>
-                    </div>
-                    <img class="card-img-top" src="{{e.image}}" alt="Card image cap">
-                    <div class="card-body">
-                        <h6 class="card-text" [ngStyle]="{'color':e.niveau === 'JUNIOR' ? 'green' : e.niveau === 'SENIOR'? 'orange' : 'red' }">{{e.niveau}}</h6>
-                        <p class="card-text" *ngIf="e.detaileq != null">Salle : {{e.detaileq.salle}}</p>
-                        <p class="card-text" *ngIf="e.detaileq != null">Thematic : {{e.detaileq.thematique}}</p>
-                        <a routerLink="update/{{e.idEquipe}}" [ngClass]="['btn', 'btn-outline-warning']">Edit</a>
-                        &nbsp;
-                        <a routerLink="addDetails/{{e.idEquipe}}" [ngClass]="['btn', 'btn-primary']">add Details</a>
-                        &nbsp;
-                        <button mat-raised-button  rel="tooltip"  class="btn btn-danger" (click)="deleteEquipe(e)" style="float: right;"><i class="material-icons">delete</i></button>
-                    </div>
-                </div>
+               <app-equipe
+               [equipe]="e"
+               (notification)="deleteEquipe($event)"
+               >
+
+               </app-equipe>
             </div>
         </div>
     </div>
